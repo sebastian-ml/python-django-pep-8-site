@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # My apps
     'main.apps.MainConfig',
-    'forum.apps.ForumConfig'
+    'forum.apps.ForumConfig',
+    'users.apps.UsersConfig'
 ]
 
 MIDDLEWARE = [
