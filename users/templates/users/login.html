@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Heading/Breadcrumbs -->
+        <h1 class="mt-4 mb-3">
+            Logowanie
+        </h1>
+
+        <div class="col-lg-8 mb-4">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-primary"
+                            type="submit">Zaloguj się
+                    </button>
+                </div>
+            </form>
+            <div class="border-top pt-3">
+                <small class="text-muted">
+                    Nie masz konta? <a class="ml-2" href="#">Zarejestruj się</a>
+                </small>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

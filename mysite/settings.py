@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     # My apps
     'main.apps.MainConfig',
     'forum.apps.ForumConfig',
-    'users.apps.UsersConfig'
+    'users.apps.UsersConfig',
+    # Others
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -122,3 +124,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+LOGIN_REDIRECT_URL = 'main-page'
+LOGIN_URL = 'login'
