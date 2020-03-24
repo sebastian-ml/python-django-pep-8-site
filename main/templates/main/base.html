@@ -60,17 +60,27 @@
                     <a class="nav-link" href="
 {% url "forum-main" %}">Forum</a>
                 </li>
-                <li class="nav-item
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="
+{% url "logout" %}">Wyloguj się</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item
 {% if request.resolver_match.url_name == "login" %}active{% endif %}">
-                    <a class="nav-link" href="
+                        <a class="nav-link" href="
 {% url "login" %}">Logowanie</a>
-                </li>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
 </nav>
 
-{% block content %}{% endblock %}
+
+    {% block content %}{% endblock %}
+
+
 
 <!-- Footer -->
 <footer class="py-5 bg-dark">
