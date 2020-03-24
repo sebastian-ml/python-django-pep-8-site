@@ -25,21 +25,23 @@
 <!-- Navigation -->
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+        <a class="navbar-brand" href="{% url 'main-page' %}">Start Bootstrap</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item{% if request.resolver_match.url_name == "about-page" %}active{% endif %}">
-                    <a class="nav-link" href="{% url "about-page" %}">About</a>
+                <li class="nav-item
+{% if request.resolver_match.url_name == 'about-page' %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'about-page' %}">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="services.html">Services</a>
+                    <a class="nav-link" href="#">Services</a>
                 </li>
                 <li class="nav-item
 {% if request.resolver_match.url_name == "contact-page" %}active{% endif %}">
-                    <a class="nav-link" href="{% url "contact-page" %}">Contact</a>
+                    <a class="nav-link" href="
+{% url "contact-page" %}">Contact</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -53,15 +55,10 @@
                         <a class="dropdown-item" href="portfolio-item.html">Single Portfolio Item</a>
                     </div>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Blog
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                        <a class="dropdown-item" href="blog-home-1.html">Blog Home 1</a>
-                        <a class="dropdown-item" href="blog-home-2.html">Blog Home 2</a>
-                        <a class="dropdown-item" href="blog-post.html">Blog Post</a>
-                    </div>
+                <li class="nav-item
+{% if request.resolver_match.url_name == "forum-main" %}active{% endif %}">
+                    <a class="nav-link" href="
+{% url "forum-main" %}">Forum</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
