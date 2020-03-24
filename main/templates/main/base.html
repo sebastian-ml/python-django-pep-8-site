@@ -77,10 +77,17 @@
     </div>
 </nav>
 
+<div class="container">
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+</div>
 
-    {% block content %}{% endblock %}
-
-
+{% block content %}{% endblock %}
 
 <!-- Footer -->
 <footer class="py-5 bg-dark">
