@@ -7,26 +7,26 @@
 
         <!-- Page Heading/Breadcrumbs -->
         <h1 class="mt-4 mb-3">
-            Logowanie
+            Rejestracja
         </h1>
 
         <div class="col-lg-8 mb-4">
-            <form method="POST">
+            <form method="post">
                 {% csrf_token %}
                 <fieldset class="form-group">
                     {{ form|crispy }}
                 </fieldset>
                 <div class="form-group">
                     <button class="btn btn-primary"
-                            type="submit">Zaloguj się
+                            type="submit">Zarejestruj się
                     </button>
                 </div>
             </form>
             <div class="border-top pt-3">
                 <small class="text-muted">
-                    Nie masz konta?
-                    <a class="ml-2" href="{% url 'register' %}">
-                        Zarejestruj się
+                    Masz już konto?
+                    <a class="ml-2" href="{% url 'login' %}">
+                        Zaloguj się
                     </a>
                 </small>
             </div>
