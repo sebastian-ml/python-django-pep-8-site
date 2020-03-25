@@ -1,4 +1,3 @@
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.messages.views import SuccessMessageMixin
@@ -6,6 +5,7 @@ from django.urls import reverse_lazy
 from django.views.generic import TemplateView, UpdateView, CreateView
 
 from .models import Profile
+from .forms import UserRegisterForm
 
 
 class ProfileView(LoginRequiredMixin, TemplateView):
@@ -25,6 +25,6 @@ class ProfileUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 
 class RegisterCreateView(CreateView):
-    form_class = UserCreationForm
+    form_class = UserRegisterForm
     template_name = 'users/register.html'
     success_url = reverse_lazy('login')
