@@ -1,0 +1,55 @@
+{% extends 'main/base.html' %}
+{% block content %}
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Heading/Breadcrumbs -->
+        {% if heading %}
+            <h1 class="mt-4 mb-3">
+                {{ heading }}
+                {% if subheading %}
+                    <small>
+                        {{ subheading }}
+                    </small>
+                {% endif %}
+            </h1>
+        {% endif %}
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'main-page' %}">Home</a>
+            </li>
+            {% if second_previous_page %}
+                <li class="breadcrumb-item">
+                    <a href="#">
+                        {{ second_previous_page }}
+                    </a>
+                </li>
+            {% endif %}
+            {% if first_previous_page %}
+                <li class="breadcrumb-item">
+                    <a href="#">
+                        {{ first_previous_page }}
+                    </a>
+                </li>
+            {% endif %}
+            <li class="breadcrumb-item active">
+                {% if subheading %}
+                    {{ subheading }}
+                {% else %}
+                    {{ heading }}
+                {% endif %}
+            </li>
+        </ol>
+
+        {% block content2 %}
+        {% endblock %}
+
+    </div>
+    <!-- /.container -->
+
+{% endblock %}
+
+
+

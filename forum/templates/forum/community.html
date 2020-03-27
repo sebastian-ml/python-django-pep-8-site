@@ -1,22 +1,15 @@
-{% extends 'main/main.html' %}
-{% block content %}
+{% extends 'main/base_with_heading.html' %}
+{% block content2 %}
 
-    <!-- Page Content -->
-    <div class="container">
-
-        <!-- Page Heading/Breadcrumbs -->
-        <h1 class="mt-4 mb-3">Forum
-            <small>Subheading</small>
-        </h1>
-
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="{% url 'main-page' %}">Home</a>
-            </li>
-            <li class="breadcrumb-item active">Forum</li>
-        </ol>
-
+    <!-- Blog Post -->
+    <div class="card mb-4">
+        <h5 class="card-header">
+            Fora
+        </h5>
+        <ul class="list-group">
+            <li class="list-group-item">Informacje</li>
+            <li class="list-group-item">Hyde Park</li>
+        </ul>
     </div>
-    <!-- /.container -->
 
 {% endblock %}

@@ -6,8 +6,10 @@ def home(request):
 
 
 def contact(request):
-    return render(request, 'main/contact.html')
+    context = {'heading': 'Contact'}
+    return render(request, 'main/contact.html', context)
 
 
 def about(request):
-    return render(request, 'main/about.html')
+    context = {'heading': 'About'}
+    return render(request, 'main/about.html', context)

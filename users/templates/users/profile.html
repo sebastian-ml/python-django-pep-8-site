@@ -4,7 +4,7 @@
     <!-- Page Content -->
     <div class="container">
 
-        <h1 class="my-4">
+        <h1 class="mt-4 mb-3">
             {{ user.username }}
         </h1>
 
@@ -16,7 +16,9 @@
         <p>
             Status:
             {% if user.is_superuser %}
-                <span style="color: #ff0300; "><b>Administrator</b></span>
+                <span style="color: #ff0300; ">
+                    <b>Administrator</b>
+                </span>
             {% else %}
                 Użytkownik
             {% endif %}

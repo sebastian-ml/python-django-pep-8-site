@@ -1,77 +1,63 @@
-{% extends 'main/main.html' %}
-{% block content %}
+{% extends 'main/base_with_heading.html' %}
+{% block content2 %}
 
-    <!-- Page Content -->
-    <div class="container">
-
-        <!-- Page Heading/Breadcrumbs -->
-        <h1 class="mt-4 mb-3">Forum
-            <small>Subheading</small>
-        </h1>
-
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="{% url 'main-page' %}">Home</a>
-            </li>
-            <li class="breadcrumb-item active">Forum</li>
-        </ol>
-
-        <!-- Blog Post -->
-        <div class="card mb-4">
-            <h5 class="card-header">Społeczność</h5>
-            <ul class="list-group">
-                <li class="list-group-item">Informacje</li>
-                <li class="list-group-item">Hyde Park</li>
-            </ul>
-        </div>
-
-        <!-- Blog Post -->
-        <div class="card mb-4">
-            <h5 class="card-header">Featured</h5>
-            <ul class="list-group">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Morbi leo risus</li>
-                <li class="list-group-item">Porta ac consectetur ac</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-            </ul>
-        </div>
-
-        <!-- Blog Post -->
-        <div class="card mb-4">
-            <h5 class="card-header">Featured</h5>
-            <ul class="list-group">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Morbi leo risus</li>
-                <li class="list-group-item">Porta ac consectetur ac</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-            </ul>
-        </div>
-
-        <!-- Blog Post -->
-        <div class="card mb-4">
-            <h5 class="card-header">Featured</h5>
-            <ul class="list-group">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Morbi leo risus</li>
-                <li class="list-group-item">Porta ac consectetur ac</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-            </ul>
-        </div>
-
-        <!-- Pagination -->
-        <ul class="pagination justify-content-center mb-4">
-            <li class="page-item">
-                <a class="page-link" href="#">&larr; Older</a>
-            </li>
-            <li class="page-item disabled">
-                <a class="page-link" href="#">Newer &rarr;</a>
-            </li>
+    <!-- Blog Post -->
+    <div class="card mb-4">
+        <h5 class="card-header">
+            <a href="{% url 'forum-community' %}">Społeczność</a>
+        </h5>
+        <ul class="list-group">
+            <li class="list-group-item">Informacje</li>
+            <li class="list-group-item">Hyde Park</li>
         </ul>
-
     </div>
-    <!-- /.container -->
+
+    <!-- Blog Post -->
+    <div class="card mb-4">
+        <h5 class="card-header">
+            <a href="{% url 'forum-featured' %}">Featured</a>
+        </h5>
+        <ul class="list-group">
+            <li class="list-group-item">Category 1</li>
+            <li class="list-group-item">Category 2</li>
+            <li class="list-group-item">Category 3</li>
+            <li class="list-group-item">Category 4</li>
+            <li class="list-group-item">Category 5</li>
+        </ul>
+    </div>
+
+    <!-- Blog Post -->
+    <div class="card mb-4">
+        <h5 class="card-header">Featured</h5>
+        <ul class="list-group">
+            <li class="list-group-item">Cras justo odio</li>
+            <li class="list-group-item">Dapibus ac facilisis in</li>
+            <li class="list-group-item">Morbi leo risus</li>
+            <li class="list-group-item">Porta ac consectetur ac</li>
+            <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+    </div>
+
+    <!-- Blog Post -->
+    <div class="card mb-4">
+        <h5 class="card-header">Featured</h5>
+        <ul class="list-group">
+            <li class="list-group-item">Cras justo odio</li>
+            <li class="list-group-item">Dapibus ac facilisis in</li>
+            <li class="list-group-item">Morbi leo risus</li>
+            <li class="list-group-item">Porta ac consectetur ac</li>
+            <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+    </div>
+
+    <!-- Pagination -->
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+            <a class="page-link" href="#">&larr; Older</a>
+        </li>
+        <li class="page-item disabled">
+            <a class="page-link" href="#">Newer &rarr;</a>
+        </li>
+    </ul>
 
 {% endblock %}
