@@ -11,11 +11,6 @@
         <p>Urodziny: {{ user.profile.born }}</p>
         <p>Miejscowość: {{ user.profile.city }}</p>
         <p>Płeć: {{ user.profile.get_sex_display }}</p>
-        <p>
-            {% if user.profile.email %}
-            E-mail: {{ user.profile.email }}
-            {% endif %}
-        </p>
         <p>Rejestracja: {{ user.date_joined }}</p>
         <p>Ostatnio zalogowany: {{ user.last_login }}</p>
         <p>
