@@ -13,29 +13,30 @@ class Profile(models.Model):
     ]
 
     user = models.OneToOneField(User,
-                                on_delete=models.CASCADE
-                                )
+                                on_delete=models.CASCADE)
+
     email = models.EmailField(verbose_name='Adres e-mail',
                               null=True,
                               blank=True,
-                              unique=True
-                              )
+                              unique=True)
+
     city = models.CharField(verbose_name='Miejscowość',
                             null=True,
                             blank=True,
                             default=None,
-                            max_length=30
-                            )
+                            max_length=30)
+
     born = models.DateField(verbose_name='Urodziny',
                             null=True,
                             blank=True,
-                            default=None
-                            )
+                            default=None)
+
     sex = models.CharField(verbose_name='Płeć',
                            max_length=1,
                            choices=SEX_TO_CHOICE,
-                           default=UNDEFINED
-                           )
+                           null=True,
+                           blank=True,
+                           default=None)
 
     def __str__(self):
         return f'{self.user.username} profile'
