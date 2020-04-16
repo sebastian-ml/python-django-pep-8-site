@@ -1,36 +1,29 @@
+from django.shortcuts import render
 from django.views.generic import TemplateView
 
 
-class HomeTemplateView(TemplateView):
-    template_name = 'forum/main.html'
+def forum_home(request):
+    context = {'heading': 'Forum'}
 
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super().get_context_data(**kwargs)
-        context['heading'] = 'Forum'
-        return context
+    return render(request, 'forum/main.html', context)
 
 
-class CommunityTemplateView(TemplateView):
-    template_name = 'forum/community.html'
+def forum_community(request):
+    context = {
+        'heading': 'Społeczność',
+        'first_subpage': 'Forum',
+    }
 
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super().get_context_data(**kwargs)
-        context['heading'] = 'Społeczność'
-        context['first_subpage'] = 'Forum'
-        return context
+    return render(request, 'forum/community.html', context)
 
 
-class FeaturedTemplateView(TemplateView):
-    template_name = 'forum/featured.html'
+def forum_featured(request):
+    context = {
+        'heading': 'Featured',
+        'first_subpage': 'Forum',
+    }
 
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super().get_context_data(**kwargs)
-        context['heading'] = 'Featured'
-        context['first_subpage'] = 'Forum'
-        return context
+    return render(request, 'forum/featured.html', context)
 
 
 class FeaturedSubpage1TemplateView(TemplateView):

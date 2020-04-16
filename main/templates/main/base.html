@@ -103,15 +103,15 @@
     </div>
 </nav>
 
-<div class="mt-2 container">
-    {% if messages %}
+{% if messages %}
+    <div class="mt-2 container">
         {% for message in messages %}
             <div class="alert alert-{{ message.tags }}">
                 {{ message }}
             </div>
         {% endfor %}
-    {% endif %}
-</div>
+    </div>
+{% endif %}
 
 {% block content %}
     {# Child template content #}

@@ -4,13 +4,13 @@ from . import views
 
 urlpatterns = [
     path('',
-         views.HomeTemplateView.as_view(),
+         views.forum_home,
          name='forum-main'),
     path('community/',
-         views.CommunityTemplateView.as_view(),
+         views.forum_community,
          name='forum-community'),
     path('featured/',
-         views.FeaturedTemplateView.as_view(),
+         views.forum_featured,
          name='forum-featured'),
     path('featured/subpage1/',
          views.FeaturedSubpage1TemplateView.as_view(),
