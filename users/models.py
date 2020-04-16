@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 
 class Profile(models.Model):
+    """Create profile. Link each profile with User. 1 Profile - 1 User"""
     MALE = 'M'
     FEMALE = 'F'
     UNDEFINED = 'U'

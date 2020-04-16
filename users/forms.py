@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 
 class UserRegisterForm(UserCreationForm):
     """Custom register form."""
+    # Add additional field to form to store user email
     email = forms.EmailField()
 
     def clean_email(self):
