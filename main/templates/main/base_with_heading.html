@@ -1,4 +1,9 @@
 {% extends 'main/base.html' %}
+{% comment %}
+    Extend basic template by adding main div to avoid inserting it in each new template.
+    Add also heading and subheading on the top of the page.
+{% endcomment %}
+
 {% block content %}
 
     <!-- Page Content -->
@@ -20,20 +25,31 @@
             <li class="breadcrumb-item">
                 <a href="{% url 'main-page' %}">Home</a>
             </li>
-            {% if second_previous_page %}
+
+            {% if first_subpage %}
                 <li class="breadcrumb-item">
-                    <a href="#">
-                        {{ second_previous_page }}
+                    {% if first_subpage == 'Forum' %}
+                        <a href="{% url 'forum-main' %}">
+                    {% else %}
+                        <a href="#">
+                    {% endif %}
+                    {{ first_subpage }}
                     </a>
                 </li>
             {% endif %}
-            {% if first_previous_page %}
+
+            {% if second_subpage %}
                 <li class="breadcrumb-item">
-                    <a href="#">
-                        {{ first_previous_page }}
+                    {% if second_subpage == 'Featured' %}
+                        <a href="{% url 'forum-featured' %}">
+                    {% else %}
+                        <a href="#">
+                    {% endif %}
+                    {{ second_subpage }}
                     </a>
                 </li>
             {% endif %}
+
             <li class="breadcrumb-item active">
                 {% if subheading %}
                     {{ subheading }}

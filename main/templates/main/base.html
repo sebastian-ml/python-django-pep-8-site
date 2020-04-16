@@ -31,9 +31,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item
-{% if request.resolver_match.url_name == 'about-page' %}active
-{% endif %}">
+                <li class="nav-item {% if request.resolver_match.url_name == 'about-page' %}active{% endif %}">
                     <a class="nav-link" href="{% url 'about-page' %}">
                         About
                     </a>
@@ -41,10 +39,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Services</a>
                 </li>
-                <li class="nav-item
-{% if request.resolver_match.url_name == "contact-page" %}active{% endif %}">
-                    <a class="nav-link" href="
-{% url "contact-page" %}">Contact</a>
+                <li class="nav-item {% if request.resolver_match.url_name == "contact-page" %}active{% endif %}">
+                    <a class="nav-link" href="{% url "contact-page" %}">
+                        Contact
+                    </a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -58,10 +56,10 @@
                         <a class="dropdown-item" href="portfolio-item.html">Single Portfolio Item</a>
                     </div>
                 </li>
-                <li class="nav-item
-{% if request.resolver_match.url_name == "forum-main" %}active{% endif %}">
-                    <a class="nav-link" href="
-{% url "forum-main" %}">Forum</a>
+                <li class="nav-item {% if request.resolver_match.url_name == "forum-main" %}active{% endif %}">
+                    <a class="nav-link" href="{% url "forum-main" %}">
+                        Forum
+                    </a>
                 </li>
 
                 {% comment %}
@@ -74,31 +72,30 @@
                             {{ user.get_username }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                            <a class="dropdown-item" href=
-                                    {% url 'profile' %}>
+                            <a class="dropdown-item" href="{% url 'profile' %}">
                                 Profil
                             </a>
-                            <a class="dropdown-item" href="
-{% url 'profile-update' %}">
+                            <a class="dropdown-item" href="{% url 'profile-update' %}">
                                 Ustawienia konta
                             </a>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="
-{% url "logout" %}">Wyloguj się</a>
+                        <a class="nav-link" href="{% url "logout" %}">
+                            Wyloguj się
+                        </a>
                     </li>
-
+                    {# If user is not authenticate display the following #}
                 {% else %}
-                    <li class="nav-item
-{% if request.resolver_match.url_name == "login" %}active{% endif %}">
-                        <a class="nav-link" href="
-{% url "login" %}">Logowanie</a>
+                    <li class="nav-item {% if request.resolver_match.url_name == "login" %}active{% endif %}">
+                        <a class="nav-link" href="{% url "login" %}">
+                            Logowanie
+                        </a>
                     </li>
-                    <li class="nav-item
-{% if request.resolver_match.url_name == "register" %}active{% endif %}">
-                        <a class="nav-link" href="
-{% url "register" %}">Rejestracja</a>
+                    <li class="nav-item {% if request.resolver_match.url_name == "register" %}active{% endif %}">
+                        <a class="nav-link" href="{% url "register" %}">
+                            Rejestracja
+                        </a>
                     </li>
                 {% endif %}
             </ul>
@@ -106,7 +103,7 @@
     </div>
 </nav>
 
-<div class="container">
+<div class="mt-2 container">
     {% if messages %}
         {% for message in messages %}
             <div class="alert alert-{{ message.tags }}">
@@ -116,7 +113,9 @@
     {% endif %}
 </div>
 
-{% block content %}{% endblock %}
+{% block content %}
+    {# Child template content #}
+{% endblock %}
 
 <!-- Footer -->
 <footer class="py-5 bg-dark">
@@ -128,8 +127,7 @@
 
 <!-- Bootstrap core JavaScript -->
 <script src="{% static 'main/vendor/jquery/jquery.min.js' %}"></script>
-<script src="
-  {% static 'main/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'main/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
 </body>
 

@@ -18,23 +18,21 @@
             <a href="{% url 'forum-featured' %}">Featured</a>
         </h5>
         <ul class="list-group">
-            <li class="list-group-item">Category 1</li>
-            <li class="list-group-item">Category 2</li>
-            <li class="list-group-item">Category 3</li>
-            <li class="list-group-item">Category 4</li>
-            <li class="list-group-item">Category 5</li>
-        </ul>
-    </div>
-
-    <!-- Blog Post -->
-    <div class="card mb-4">
-        <h5 class="card-header">Featured</h5>
-        <ul class="list-group">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
+            <li class="list-group-item">
+                <a href="{% url 'forum-featured-subpage1' %}">Category 1</a>
+            </li>
+            <li class="list-group-item">
+                <a href="{% url 'forum-featured-subpage2' %}">Category 2</a>
+            </li>
+            <li class="list-group-item">
+                <a href="{% url 'forum-featured-subpage3' %}">Category 3</a>
+            </li>
+            <li class="list-group-item">
+                <a href="{% url 'forum-featured-subpage4' %}">Category 4</a>
+            </li>
+            <li class="list-group-item">
+                <a href="{% url 'forum-featured-subpage5' %}">Category 5</a>
+            </li>
         </ul>
     </div>
 
