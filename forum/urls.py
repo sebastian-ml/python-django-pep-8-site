@@ -27,4 +27,7 @@ urlpatterns = [
     path('featured/subpage5/',
          views.FeaturedSubpage5TemplateView.as_view(),
          name='forum-featured-subpage5'),
+    path('featured/create-post',
+         views.PostCreateView.as_view(),
+         name='forum-post-create'),
 ]

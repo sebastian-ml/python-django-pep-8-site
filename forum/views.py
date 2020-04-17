@@ -1,5 +1,7 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, CreateView
+from .models import Post
 
 
 def forum_home(request):
@@ -73,5 +75,11 @@ class FeaturedSubpage5TemplateView(FeaturedSubpage1TemplateView):
         context = super().get_context_data(**kwargs)
         context['subheading'] = 'Category5'
         return context
+
+
+class PostCreateView(CreateView, LoginRequiredMixin):
+    model = Post
+    template_name = 'forum/post_create.html'
+    fields = ['title', 'content']
 
 
