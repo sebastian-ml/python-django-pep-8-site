@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import TemplateView, CreateView, ListView
 from .models import Post
 
 
@@ -28,22 +28,6 @@ def forum_featured(request):
     return render(request, 'forum/featured.html', context)
 
 
-class FeaturedSubpageView(TemplateView):
-    subheading = None
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # Add custom context keys
-        # First 3 context keys are the same for each featured subpage
-        context['heading'] = 'Featured'
-        context['first_subpage'] = 'Forum'
-        context['second_subpage'] = 'Featured'
-        # Subheading is different for each featured subpage
-        context['subheading'] = self.subheading
-
-        return context
-
-
 class PostCreateView(LoginRequiredMixin, CreateView):
     """Create a post."""
     # Variable to gather data from urls.py
@@ -62,6 +46,33 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         form.instance.forum_id = self.forum_id
 
         return super().form_valid(form)
+
+
+class PostListView(ListView):
+    """Display all posts on a specific topic."""
+    model = Post
+    subheading = None
+    forum_id = None
+
+    def get_context_data(self, **kwargs):
+        """Extend basic context by custom keys."""
+        context = super().get_context_data(**kwargs)
+        # First 3 context keys are the same for each featured subpage
+        context['heading'] = 'Featured'
+        context['first_subpage'] = 'Forum'
+        context['second_subpage'] = 'Featured'
+        # Get subheading from urls.py
+        context['subheading'] = self.subheading
+        # Get posts filtered by forum_id - forum_id indicated in urls.py
+        context['posts'] = Post.objects.filter(forum_id=self.forum_id).\
+            order_by('-date_posted')
+
+        return context
+
+
+
+
+
 
 
 
