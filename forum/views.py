@@ -44,10 +44,24 @@ class FeaturedSubpageView(TemplateView):
         return context
 
 
-class PostCreateView(CreateView, LoginRequiredMixin):
+class PostCreateView(LoginRequiredMixin, CreateView):
+    """Create a post."""
+    # Variable to gather data from urls.py
+    forum_id = None
     model = Post
-    template_name = 'forum/post_create.html'
     fields = ['title', 'content']
+
+    def form_valid(self, form):
+        """
+        Fill the author and forum_id automatically.
+        User doesn't see these fields.
+        """
+        # Set logged user as author of the post
+        form.instance.author = self.request.user
+        # Get forum_id from parameter passed in urls.py
+        form.instance.forum_id = self.forum_id
+
+        return super().form_valid(form)
 
 
 
