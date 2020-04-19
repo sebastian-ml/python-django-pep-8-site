@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 
 
@@ -13,10 +14,16 @@ class Post(models.Model):
         FEATURED_SUB4 = 14
         FEATURED_SUB5 = 15
 
-    title = models.CharField(max_length=40)
+    title = models.CharField(verbose_name='Tytuł',
+                             max_length=40)
     forum_id = models.IntegerField(choices=Forums.choices)
-    content = models.TextField(max_length=500)
+    content = models.TextField(verbose_name='Treść',
+                               max_length=500)
     author = models.ForeignKey(User,
                                on_delete=models.SET_DEFAULT,
                                default='deleted_user')
     date_posted = models.DateTimeField(default=timezone.now)
+
+    def get_absolute_url(self):
+        """Redirect user after successful post creation."""
+        return reverse('forum-featured')

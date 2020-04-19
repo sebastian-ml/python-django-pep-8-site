@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
-from django.views.generic import TemplateView, CreateView, ListView
+from django.views.generic import CreateView, ListView
 from .models import Post
 
 
@@ -47,6 +47,15 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
         return super().form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        """Extend basic context by custom keys."""
+        context = super().get_context_data(**kwargs)
+        context['heading'] = 'Dodaj nowy temat'
+        context['first_subpage'] = 'Forum'
+        context['second_subpage'] = 'Featured'
+
+        return context
+
 
 class PostListView(ListView):
     """Display all posts on a specific topic."""
@@ -64,7 +73,7 @@ class PostListView(ListView):
         # Get subheading from urls.py
         context['subheading'] = self.subheading
         # Get posts filtered by forum_id - forum_id indicated in urls.py
-        context['posts'] = Post.objects.filter(forum_id=self.forum_id).\
+        context['posts'] = Post.objects.filter(forum_id=self.forum_id). \
             order_by('-date_posted')
 
         return context
