@@ -20,7 +20,7 @@ class ProfileUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     fields = ['email', 'city', 'born', 'sex']
     # Display a message when user updates its profile
     success_message = 'Zaktualizowano profil'
-    success_url = reverse_lazy('profile-update')
+    success_url = reverse_lazy('users:profile-update')
 
     def get_object(self):
         """Get the id of logged user."""
@@ -31,4 +31,4 @@ class RegisterCreateView(CreateView):
     """View responsible for user creation."""
     form_class = UserRegisterForm
     template_name = 'users/register.html'
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('users:login')

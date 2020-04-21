@@ -21,9 +21,9 @@ class Post(models.Model):
                                max_length=500)
     author = models.ForeignKey(User,
                                on_delete=models.SET_DEFAULT,
-                               default='deleted_user')
+                               default='Konto usunięte')
     date_posted = models.DateTimeField(default=timezone.now)
 
     def get_absolute_url(self):
         """Redirect user after successful post creation."""
-        return reverse('forum-featured')
+        return reverse('forum:featured')

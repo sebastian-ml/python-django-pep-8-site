@@ -30,6 +30,7 @@ def forum_featured(request):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     """Create a post."""
+    template_name = 'forum/post_create.html'
     # Variable to gather data from urls.py
     forum_id = None
     model = Post
@@ -59,6 +60,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostListView(ListView):
     """Display all posts on a specific topic."""
+    template_name = 'forum/forum_category.html'
     model = Post
     subheading = None
     forum_id = None

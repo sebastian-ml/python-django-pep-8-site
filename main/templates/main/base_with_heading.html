@@ -23,13 +23,13 @@
 
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="{% url 'main-page' %}">Home</a>
+                <a href="{% url 'main:home' %}">Home</a>
             </li>
 
             {% if first_subpage %}
                 <li class="breadcrumb-item">
                     {% if first_subpage == 'Forum' %}
-                        <a href="{% url 'forum-main' %}">
+                        <a href="{% url 'forum:main' %}">
                     {% else %}
                         <a href="#">
                     {% endif %}
@@ -41,7 +41,7 @@
             {% if second_subpage %}
                 <li class="breadcrumb-item">
                     {% if second_subpage == 'Featured' %}
-                        <a href="{% url 'forum-featured' %}">
+                        <a href="{% url 'forum:featured' %}">
                     {% else %}
                         <a href="#">
                     {% endif %}
