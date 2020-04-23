@@ -1,26 +1,46 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
 
 
 class UserRegisterForm(UserCreationForm):
     """Custom register form."""
-    # Add additional field to form to store user email
-    email = forms.EmailField()
+    # Add additional field to store user email
+    email = forms.EmailField(required=True,
+                             help_text="Required.")
+    email2 = forms.EmailField(required=True,
+                              help_text="Enter the same email as before, "
+                                        "for verification.",
+                              label='Email confirmation')
 
-    def clean_email(self):
-        """Get an e-mail and check if it already exists in db."""
-        email = self.cleaned_data['email']
-        # If email already exists in db raise an error
+    def clean(self):
+        """Clear emails, compare. Lower user input."""
+        cleaned_data = super().clean()
+        email = cleaned_data['email'].lower()
+        email2 = cleaned_data['email2'].lower()
+
+        # Check if both emails are the same
+        if email and email2 and email != email2:
+            self._errors['email2'] = self.error_class(
+                ['Podane e-maile się różnią']
+            )
+            del self.cleaned_data['email2']
+
+        # Check if email already exists in db
         if User.objects.filter(email=email):
-            raise ValidationError("Podany adres e-mail jest już wykorzystywany")
-        return email
+            self._errors['email'] = self.error_class(
+                ['Podany adres e-mail jest już wykorzystywany']
+            )
+            del self.cleaned_data['email']
+
+        return cleaned_data
 
     class Meta:
-        # Choose fields that are displayed during the registration process
+        # Choose additional fields and set the order
         model = User
         fields = [
             'username', 'email',
-            'password1', 'password2',
+            'email2', 'password1',
+            'password2',
         ]
+
