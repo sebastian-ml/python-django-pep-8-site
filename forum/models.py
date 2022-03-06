@@ -4,26 +4,43 @@ from django.urls import reverse
 from django.utils import timezone
 
 
+class Section(models.Model):
+    """Create new section in forum."""
+    created_by = models.ForeignKey(User,
+                                   on_delete=models.PROTECT)
+    name = models.CharField(max_length=30)
+    date_created = models.DateTimeField(default=timezone.now)
+
+
+class Category(models.Model):
+    """Create new category in certain forum section."""
+    section = models.ForeignKey(Section,
+                                on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User,
+                                   on_delete=models.PROTECT)
+    name = models.CharField(max_length=30)
+    date_created = models.DateTimeField(default=timezone.now)
+
+
+class Topic(models.Model):
+    """Create new topic in certain category."""
+    category = models.ForeignKey(Category,
+                                 on_delete=models.CASCADE)
+    author = models.ForeignKey(User,
+                               on_delete=models.SET_DEFAULT,
+                               default='Deleted account')
+    title = models.CharField(max_length=40)
+    content = models.TextField(max_length=500)
+    date_posted = models.DateTimeField(default=timezone.now)
+
+
 class Post(models.Model):
     """Allow user to create a post."""
-    class Forums(models.IntegerChoices):
-        """List of all pages with their id where user can create a post."""
-        FEATURED_SUB1 = 11
-        FEATURED_SUB2 = 12
-        FEATURED_SUB3 = 13
-        FEATURED_SUB4 = 14
-        FEATURED_SUB5 = 15
-
-    title = models.CharField(verbose_name='Tytuł',
-                             max_length=40)
-    forum_id = models.IntegerField(choices=Forums.choices)
-    content = models.TextField(verbose_name='Treść',
-                               max_length=500)
+    topic = models.ForeignKey(Topic,
+                              on_delete=models.CASCADE)
     author = models.ForeignKey(User,
                                on_delete=models.SET_DEFAULT,
                                default='Konto usunięte')
+    content = models.TextField(verbose_name='Treść',
+                               max_length=500)
     date_posted = models.DateTimeField(default=timezone.now)
-
-    def get_absolute_url(self):
-        """Redirect user after successful post creation."""
-        return reverse('forum:featured')
