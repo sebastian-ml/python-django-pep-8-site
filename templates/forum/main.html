@@ -1,0 +1,22 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+    <!-- Blog Topic -->
+    {% for section in sections %}
+        <div class="card mb-4">
+            <h5 class="card-header">
+                <a href="{% url 'forum:section' section.name %}">{{ section.name }}</a>
+            </h5>
+            <ul class="list-group">
+                {% for category in section.categories.all %}
+                    <li class="list-group-item">
+                        <a href="{% url 'forum:category' section_name=section.name name=category.name %}">{{ category.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+
+    {% include 'components/_pagination.html' %}
+
+{% endblock %}

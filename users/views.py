@@ -10,13 +10,11 @@ from .forms import UserRegisterForm
 class ProfileView(LoginRequiredMixin, TemplateView):
     """Show user profile."""
     model = User
-    template_name = 'users/profile.html'
 
 
 class ProfileUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     """Allow user to update its profile and change some information."""
     model = Profile
-    template_name = 'users/profile_update.html'
     fields = ['email', 'city', 'born', 'sex']
     # Display a message when user updates its profile
     success_message = 'Zaktualizowano profil'
@@ -30,5 +28,4 @@ class ProfileUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 class RegisterCreateView(CreateView):
     """View responsible for user creation."""
     form_class = UserRegisterForm
-    template_name = 'users/register.html'
     success_url = reverse_lazy('users:login')

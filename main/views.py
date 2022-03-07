@@ -8,11 +8,11 @@ def home(request):
 
 def contact(request):
     """Display contact page. Set the heading also."""
-    context = {'heading': 'Contact'}
+    context = {'heading': 'Contact', 'breadcrumbs': True}
     return render(request, 'main/contact.html', context)
 
 
 def about(request):
     """Display about page. Set the heading also."""
-    context = {'heading': 'About'}
+    context = {'heading': 'About', 'breadcrumbs': True}
     return render(request, 'main/about.html', context)

@@ -1,11 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
 from django.views.generic import CreateView, ListView, DetailView
 from .models import Section, Category, Topic
 
 
 class SectionListView(ListView):
-    template_name = 'forum/main.html'
     model = Section
     context_object_name = 'sections'
     ordering = ['name']
@@ -13,12 +11,12 @@ class SectionListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['heading'] = 'Forum'
+        context['breadcrumbs'] = True
 
         return context
 
 
 class SectionDetailView(DetailView):
-    template_name = 'forum/section.html'
     model = Section
     slug_field = 'name'
     slug_url_kwarg = 'name'
@@ -26,6 +24,7 @@ class SectionDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['heading'] = self.object.name
+        context['breadcrumbs'] = True
         context['categories'] = Category.objects.filter(
             section=self.object.pk
         )
@@ -34,7 +33,6 @@ class SectionDetailView(DetailView):
 
 
 class CategoryDetailView(DetailView):
-    template_name = 'forum/category.html'
     model = Category
     slug_field = 'name'
     slug_url_kwarg = 'name'
@@ -42,6 +40,7 @@ class CategoryDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['heading'] = self.object.name
+        context['breadcrumbs'] = True
         context['topics'] = Topic.objects.filter(
             category=self.object.pk
         )
@@ -51,13 +50,13 @@ class CategoryDetailView(DetailView):
 
 class TopicCreateView(LoginRequiredMixin, CreateView):
     """Create new topic."""
-    template_name = 'forum/topic_form.html'
     model = Topic
     fields = ['title', 'content']
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['heading'] = 'Add new topic'
+        context['breadcrumbs'] = True
 
         return context
 
