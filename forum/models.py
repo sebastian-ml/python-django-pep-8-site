@@ -15,7 +15,8 @@ class Section(models.Model):
 class Category(models.Model):
     """Create new category in certain forum section."""
     section = models.ForeignKey(Section,
-                                on_delete=models.CASCADE)
+                                on_delete=models.CASCADE,
+                                related_name='categories')
     created_by = models.ForeignKey(User,
                                    on_delete=models.PROTECT)
     name = models.CharField(max_length=30)
@@ -33,6 +34,13 @@ class Topic(models.Model):
     content = models.TextField(max_length=500)
     date_posted = models.DateTimeField(default=timezone.now)
 
+    def get_absolute_url(self):
+        return reverse('forum:category',
+                       kwargs={
+                           'section_name': self.category.section.name,
+                           'name': self.category.name
+                       })
+
 
 class Post(models.Model):
     """Allow user to create a post."""
@@ -40,7 +48,6 @@ class Post(models.Model):
                               on_delete=models.CASCADE)
     author = models.ForeignKey(User,
                                on_delete=models.SET_DEFAULT,
-                               default='Konto usunięte')
-    content = models.TextField(verbose_name='Treść',
-                               max_length=500)
+                               default='Deleted account')
+    content = models.TextField(max_length=500)
     date_posted = models.DateTimeField(default=timezone.now)
