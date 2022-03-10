@@ -32,7 +32,7 @@
                     only for authenticated users
                 {% endcomment %}
                 {% if user.is_authenticated %}
-                    <li class="nav-item dropdown {% if '/forum' in request.path %}active{% endif %}">
+                    <li class="nav-item dropdown {% if '/users' in request.path %}active{% endif %}">
                         <a class="nav-link dropdown-toggle" href="#"
                            id="navbarDropdownPortfolio" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">

@@ -26,6 +26,11 @@ urlpatterns = [
              template_name=f'{app_name}/profile.html'
          ),
          name='profile'),
+    path('profile/<int:pk>/',
+         views.ProfileView.as_view(
+             template_name=f'{app_name}/profile_details.html'
+         ),
+         name='profile-details'),
     path('settings/',
          views.ProfileUpdateView.as_view(
              template_name=f'{app_name}/profile_update.html'
