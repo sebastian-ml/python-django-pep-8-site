@@ -31,12 +31,12 @@
                     Display these buttons on the navbar
                     only for authenticated users
                 {% endcomment %}
-                {% if user.is_authenticated %}
-                    <li class="nav-item dropdown {% if '/users' in request.path %}active{% endif %}">
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item dropdown {% if '/users' in request.path and user.pk == request.user.pk %}active{% endif %}">
                         <a class="nav-link dropdown-toggle" href="#"
                            id="navbarDropdownPortfolio" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            {{ user.get_username }}
+                            {{ request.user.get_username }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right"
                              aria-labelledby="navbarDropdownPortfolio">
