@@ -8,6 +8,10 @@ urlpatterns = [
          views.SectionListView.as_view(
              template_name=f'{app_name}/main.html'),
          name='main'),
+    path('topic/<int:pk>/',
+         views.TopicDetailView.as_view(
+             template_name=f'{app_name}/topic_details.html'),
+         name='topic-details'),
     path('<str:name>/',
          views.SectionDetailView.as_view(
              template_name=f'{app_name}/section.html'),

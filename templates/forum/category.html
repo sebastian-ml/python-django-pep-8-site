@@ -25,8 +25,16 @@
         {% for topic in topics %}
             <tr>
                 <th scope="row">{{ forloop.revcounter }}</th>
-                <td>{{ topic.title }}</td>
-                <td>{{ topic.author }}</td>
+                <td>
+                    <a href="{% url 'forum:topic-details' topic.id %}">
+                        {{ topic.title }}
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ topic.author.profile.get_absolute_url }}">
+                        {{ topic.author }}
+                    </a>
+                </td>
                 <td></td>
             </tr>
         {% endfor %}
