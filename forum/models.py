@@ -35,11 +35,7 @@ class Topic(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
 
     def get_absolute_url(self):
-        return reverse('forum:category',
-                       kwargs={
-                           'section_name': self.category.section.name,
-                           'name': self.category.name
-                       })
+        return reverse('forum:topic-details', kwargs={'pk': self.pk})
 
 
 class Post(models.Model):

@@ -26,7 +26,7 @@
             <tr>
                 <th scope="row">{{ forloop.revcounter }}</th>
                 <td>
-                    <a href="{% url 'forum:topic-details' topic.id %}">
+                    <a href="{{ topic.get_absolute_url }}">
                         {{ topic.title }}
                     </a>
                 </td>
