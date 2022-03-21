@@ -1,19 +1,35 @@
 {% extends 'layout/base.html' %}
 
 {% block content %}
-    <div class="card">
+    <div class="card mb-4">
         <h4 class="card-header">{{ topic.title }}</h4>
         <div class="card-body">
             <p class="card-text">{{ topic.content }}</p>
         </div>
         <div class="card-footer d-flex justify-content-between">
-            <p class="d-flex align-items-center mb-0">Posted by:&nbsp;
-                <a href="{{ topic.author.profile.get_absolute_url }}">
-                    {{ topic.author.username }}
-                </a>
-                , {{ topic.date_posted|date:"d M Y" }}
+            <p class="d-flex align-items-center mb-0">
+                <small>
+                    <a href="{{ topic.author.profile.get_absolute_url }}">
+                        {{ topic.author.username }}</a>, {{ topic.date_posted|date:"d M Y h:i A" }}
+                </small>
             </p>
-            <a href="#" class="btn btn-primary">Reply</a>
+            <a href="{% url 'forum:post-create' topic.pk %}"
+               class="btn btn-primary">Reply
+            </a>
         </div>
     </div>
+    {% for post in topic.posts.all %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <p class="card-text">{{ post.content }}</p>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <p class="d-flex align-items-center mb-0">
+                    <small><a href="{{ post.author.profile.get_absolute_url }}">
+                        {{ post.author.username }}</a>, {{ post.date_posted|date:"d M Y h:i A" }}
+                    </small>
+                </p>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}

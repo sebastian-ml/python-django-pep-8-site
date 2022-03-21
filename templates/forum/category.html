@@ -15,9 +15,9 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Tytuł</th>
-            <th scope="col">Autor</th>
-            <th scope="col">Ostatnio skomentował</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Lastly commented by</th>
         </tr>
         </thead>
 
@@ -35,7 +35,11 @@
                         {{ topic.author }}
                     </a>
                 </td>
-                <td></td>
+                <td>
+                    <a href="{{ topic.posts.last.author.profile.get_absolute_url }}">
+                        {{ topic.posts.last.author }}
+                    </a>
+                </td>
             </tr>
         {% endfor %}
         </tbody>

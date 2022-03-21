@@ -12,6 +12,10 @@ urlpatterns = [
          views.TopicDetailView.as_view(
              template_name=f'{app_name}/topic_details.html'),
          name='topic-details'),
+    path('topic/<int:pk>/reply/',
+         views.PostCreateView.as_view(
+             template_name=f'{app_name}/post_form.html'),
+         name='post-create'),
     path('<str:name>/',
          views.SectionDetailView.as_view(
              template_name=f'{app_name}/section.html'),

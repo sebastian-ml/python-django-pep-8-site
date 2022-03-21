@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, ListView, DetailView
-from .models import Section, Category, Topic
+from .models import Section, Category, Topic, Post
 
 
 class SectionListView(ListView):
@@ -82,3 +82,22 @@ class TopicDetailView(DetailView):
         context['breadcrumbs'] = True
 
         return context
+
+
+class PostCreateView(CreateView):
+    model = Post
+    fields = ['content']
+
+    def get_context_data(self, **kwargs):
+        reply_topic_title = Topic.objects.get(id=self.kwargs.get('pk')).title
+        context = super().get_context_data(**kwargs)
+        context['heading'] = f'Replying to: {reply_topic_title}'
+        context['breadcrumbs'] = True
+
+        return context
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.topic = Topic.objects.get(id=self.kwargs.get('pk'))
+
+        return super().form_valid(form)

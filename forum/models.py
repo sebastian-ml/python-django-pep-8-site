@@ -41,9 +41,13 @@ class Topic(models.Model):
 class Post(models.Model):
     """Allow user to create a post."""
     topic = models.ForeignKey(Topic,
-                              on_delete=models.CASCADE)
+                              on_delete=models.CASCADE,
+                              related_name='posts')
     author = models.ForeignKey(User,
                                on_delete=models.SET_DEFAULT,
                                default='Deleted account')
     content = models.TextField(max_length=500)
     date_posted = models.DateTimeField(default=timezone.now)
+
+    def get_absolute_url(self):
+        return reverse('forum:topic-details', kwargs={'pk': self.topic.pk})
