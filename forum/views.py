@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import get_object_or_404
 from .models import Section, Category, Topic, Post
 from django.urls import reverse
 from django.views.generic import (CreateView,
@@ -89,15 +90,15 @@ class TopicDetailView(DetailView):
         return context
 
 
-class TopicUpdateView(UpdateView, LoginRequiredMixin, UserPassesTestMixin):
+class TopicUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Topic
     fields = ['title', 'content']
 
     def test_func(self):
-        post = self.get_object()
-        if self.request.user == post.author:
-            return True
-        return False
+        topic = self.get_object()
+
+        return (self.request.user == topic.author
+                or self.request.user.is_superuser)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -107,14 +108,14 @@ class TopicUpdateView(UpdateView, LoginRequiredMixin, UserPassesTestMixin):
         return context
 
 
-class TopicDeleteView(DeleteView, LoginRequiredMixin, UserPassesTestMixin):
+class TopicDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Topic
 
     def test_func(self):
         topic = self.get_object()
-        if self.request.user == topic.author or self.request.user.is_superuser:
-            return True
-        return False
+
+        return (self.request.user == topic.author
+                or self.request.user.is_superuser)
 
     def get_success_url(self):
         topic = self.get_object()
