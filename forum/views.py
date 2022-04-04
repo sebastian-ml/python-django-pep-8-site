@@ -1,7 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic import CreateView, ListView, DetailView, DeleteView
 from .models import Section, Category, Topic, Post
 from django.urls import reverse
+from django.views.generic import (CreateView,
+                                  ListView,
+                                  DetailView,
+                                  DeleteView,
+                                  UpdateView)
 
 
 class SectionListView(ListView):
@@ -80,6 +84,24 @@ class TopicDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['heading'] = self.object.category.name
+        context['breadcrumbs'] = True
+
+        return context
+
+
+class TopicUpdateView(UpdateView, LoginRequiredMixin, UserPassesTestMixin):
+    model = Topic
+    fields = ['title', 'content']
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['heading'] = f'Update: "{self.get_object().title}"'
         context['breadcrumbs'] = True
 
         return context
