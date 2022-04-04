@@ -1,6 +1,7 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView, ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.generic import CreateView, ListView, DetailView, DeleteView
 from .models import Section, Category, Topic, Post
+from django.urls import reverse
 
 
 class SectionListView(ListView):
@@ -79,6 +80,30 @@ class TopicDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['heading'] = self.object.category.name
+        context['breadcrumbs'] = True
+
+        return context
+
+
+class TopicDeleteView(DeleteView, LoginRequiredMixin, UserPassesTestMixin):
+    model = Topic
+
+    def test_func(self):
+        topic = self.get_object()
+        if self.request.user == topic.author or self.request.user.is_superuser:
+            return True
+        return False
+
+    def get_success_url(self):
+        topic = self.get_object()
+        return reverse('forum:category', kwargs={
+            'section_name': topic.category.section.name,
+            'name': topic.category.name
+        })
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['heading'] = 'Delete topic'
         context['breadcrumbs'] = True
 
         return context

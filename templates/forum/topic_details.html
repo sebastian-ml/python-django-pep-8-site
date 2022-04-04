@@ -2,7 +2,16 @@
 
 {% block content %}
     <div class="card mb-4">
-        <h4 class="card-header">{{ topic.title }}</h4>
+        <h4 class="card-header d-flex justify-content-between">{{ topic.title }}
+            {% if topic.author == user or request.user.is_superuser %}
+                <div>
+                    <a href="{% url 'forum:topic-delete' topic.pk %}"
+                       class="btn btn-danger">
+                        <i class="bi bi-trash3"></i>
+                    </a>
+                </div>
+            {% endif %}
+        </h4>
         <div class="card-body">
             <p class="card-text">{{ topic.content }}</p>
         </div>

@@ -12,6 +12,10 @@ urlpatterns = [
          views.TopicDetailView.as_view(
              template_name=f'{app_name}/topic_details.html'),
          name='topic-details'),
+    path('topic/<int:pk>/delete/',
+         views.TopicDeleteView.as_view(
+             template_name=f'{app_name}/topic_delete_confirm.html'),
+         name='topic-delete'),
     path('topic/<int:pk>/reply/',
          views.PostCreateView.as_view(
              template_name=f'{app_name}/post_form.html'),
