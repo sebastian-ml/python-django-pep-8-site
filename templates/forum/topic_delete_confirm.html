@@ -1,5 +1,9 @@
 {% extends 'layout/base.html' %}
 {% block content %}
+    <h1 class="mt-4 mb-3">
+        Delete topic
+    </h1>
+
     <form method="POST">
         {% csrf_token %}
         <h2>Are you sure you want to delete

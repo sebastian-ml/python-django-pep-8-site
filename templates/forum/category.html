@@ -1,6 +1,22 @@
 {% extends 'layout/base.html' %}
 
 {% block content %}
+    <h1 class="mt-4 mb-3">
+        {{ category.name }}
+    </h1>
+
+    <ol class="breadcrumb">
+        {% url 'main:home' as url %}
+        {% include 'components/_breadcrumb_item.html' with text='Home' url=url %}
+
+        {% url 'forum:main' as url %}
+        {% include 'components/_breadcrumb_item.html' with text='Forum' url=url %}
+
+        {% url 'forum:section' category.section.name as url %}
+        {% include 'components/_breadcrumb_item.html' with text=category.section.name url=url %}
+
+        {% include 'components/_breadcrumb_item.html' with text=category.name active=True %}
+    </ol>
 
     {% if user.is_authenticated %}
         <div class="text-right mb-3">

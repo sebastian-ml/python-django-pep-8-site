@@ -1,0 +1,11 @@
+{% if active %}
+    <li class="breadcrumb-item active">
+        {{ text }}
+    </li>
+{% else %}
+    <li class="breadcrumb-item active">
+        <a href="{{ url }}">
+            {{ text }}
+        </a>
+    </li>
+{% endif %}

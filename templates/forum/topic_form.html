@@ -2,6 +2,42 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+    <h1 class="mt-4 mb-3">
+        {% if '/create' in request.path %}
+            Add new topic
+        {% else %}
+            Updating: "{{ topic.title }}"
+        {% endif %}
+    </h1>
+
+    <ol class="breadcrumb">
+        {% url 'main:home' as url %}
+        {% include 'components/_breadcrumb_item.html' with text='Home' url=url %}
+
+        {% url 'forum:main' as url %}
+        {% include 'components/_breadcrumb_item.html' with text='Forum' url=url %}
+
+        {% if '/create' in request.path %}
+            {% url 'forum:section' category.section.name as url %}
+            {% include 'components/_breadcrumb_item.html' with text=category.section.name url=url %}
+
+            {% url 'forum:category' section_name=category.section.name name=category.name as url %}
+            {% include 'components/_breadcrumb_item.html' with text=category.name url=url %}
+
+            {% include 'components/_breadcrumb_item.html' with text='Create topic' active=True %}
+        {% else %}
+            {% url 'forum:section' topic.category.section.name as url %}
+            {% include 'components/_breadcrumb_item.html' with text=topic.category.section.name url=url %}
+
+            {% url 'forum:category' section_name=topic.category.section.name name=topic.category.name as url %}
+            {% include 'components/_breadcrumb_item.html' with text=topic.category.name url=url %}
+
+            {% url 'forum:topic-details' topic.id as url %}
+            {% include 'components/_breadcrumb_item.html' with text=topic.title url=url %}
+
+            {% include 'components/_breadcrumb_item.html' with text='Update' active=True %}
+        {% endif %}
+    </ol>
     <form method="POST">
         {% csrf_token %}
         {{ form|crispy }}

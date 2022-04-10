@@ -1,5 +1,4 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.shortcuts import get_object_or_404
 from .models import Section, Category, Topic, Post
 from django.urls import reverse
 from django.views.generic import (CreateView,
@@ -14,13 +13,6 @@ class SectionListView(ListView):
     context_object_name = 'sections'
     ordering = ['name']
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['heading'] = 'Forum'
-        context['breadcrumbs'] = True
-
-        return context
-
 
 class SectionDetailView(DetailView):
     model = Section
@@ -29,8 +21,6 @@ class SectionDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['heading'] = self.object.name
-        context['breadcrumbs'] = True
         context['categories'] = Category.objects.filter(
             section=self.object.pk
         )
@@ -45,8 +35,6 @@ class CategoryDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['heading'] = self.object.name
-        context['breadcrumbs'] = True
         context['topics'] = Topic.objects.filter(
             category=self.object.pk
         )
@@ -61,8 +49,9 @@ class TopicCreateView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['heading'] = 'Add new topic'
-        context['breadcrumbs'] = True
+        context['category'] = Category.objects.get(
+            id=self.kwargs.get('category_id')
+        )
 
         return context
 
@@ -82,13 +71,6 @@ class TopicCreateView(LoginRequiredMixin, CreateView):
 class TopicDetailView(DetailView):
     model = Topic
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['heading'] = self.object.category.name
-        context['breadcrumbs'] = True
-
-        return context
-
 
 class TopicUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Topic
@@ -102,8 +84,7 @@ class TopicUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['heading'] = f'Update: "{self.get_object().title}"'
-        context['breadcrumbs'] = True
+        context['topic'] = self.get_object()
 
         return context
 
@@ -124,23 +105,14 @@ class TopicDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             'name': topic.category.name
         })
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['heading'] = 'Delete topic'
-        context['breadcrumbs'] = True
-
-        return context
-
 
 class PostCreateView(CreateView):
     model = Post
     fields = ['content']
 
     def get_context_data(self, **kwargs):
-        reply_topic_title = Topic.objects.get(id=self.kwargs.get('pk')).title
         context = super().get_context_data(**kwargs)
-        context['heading'] = f'Replying to: {reply_topic_title}'
-        context['breadcrumbs'] = True
+        context['topic'] = Topic.objects.get(id=self.kwargs.get('pk'))
 
         return context
 

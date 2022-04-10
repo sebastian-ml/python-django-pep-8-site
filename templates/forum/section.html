@@ -1,6 +1,20 @@
 {% extends 'layout/base.html' %}
 
 {% block content %}
+    <h1 class="mt-4 mb-3">
+        {{ section.name }}
+    </h1>
+
+    <ol class="breadcrumb">
+        {% url 'main:home' as url %}
+        {% include 'components/_breadcrumb_item.html' with text='Home' url=url %}
+
+        {% url 'forum:main' as url %}
+        {% include 'components/_breadcrumb_item.html' with text='Forum' url=url %}
+
+        {% include 'components/_breadcrumb_item.html' with text=section.name active=True %}
+    </ol>
+
     <!-- Blog Post -->
     <div class="card mb-4">
         <h5 class="card-header">{{ section.name }}</h5>

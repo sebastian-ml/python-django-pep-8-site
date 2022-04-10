@@ -15,7 +15,8 @@
           rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="{% static 'css/modern-business.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
 
@@ -29,14 +30,6 @@
 {% endblock %}
 
 <div class="container">
-    {% if heading %}
-        {% include 'components/_heading.html' %}
-    {% endif %}
-
-    {% if breadcrumbs %}
-        {% include 'components/_breadcrumbs.html' %}
-    {% endif %}
-
     {% block content %}
     {% endblock %}
 </div>
