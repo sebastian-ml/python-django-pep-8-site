@@ -38,7 +38,7 @@
         </thead>
 
         <tbody>
-        {% for topic in topics %}
+        {% for topic in category.topics.all %}
             <tr>
                 <th scope="row">{{ forloop.revcounter }}</th>
                 <td>

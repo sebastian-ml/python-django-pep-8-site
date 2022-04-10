@@ -19,7 +19,7 @@
     <div class="card mb-4">
         <h5 class="card-header">{{ section.name }}</h5>
         <ul class="list-group">
-            {% for category in categories %}
+            {% for category in section.categories.all %}
                 <li class="list-group-item">
                     <a href="{% url 'forum:category' section_name=category.section.name name=category.name %}">{{ category.name }}</a>
                 </li>

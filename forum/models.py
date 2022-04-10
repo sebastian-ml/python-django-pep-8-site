@@ -26,7 +26,8 @@ class Category(models.Model):
 class Topic(models.Model):
     """Create new topic in certain category."""
     category = models.ForeignKey(Category,
-                                 on_delete=models.CASCADE)
+                                 on_delete=models.CASCADE,
+                                 related_name='topics')
     author = models.ForeignKey(User,
                                on_delete=models.SET_DEFAULT,
                                default='Deleted account')

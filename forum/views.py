@@ -19,27 +19,11 @@ class SectionDetailView(DetailView):
     slug_field = 'name'
     slug_url_kwarg = 'name'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['categories'] = Category.objects.filter(
-            section=self.object.pk
-        )
-
-        return context
-
 
 class CategoryDetailView(DetailView):
     model = Category
     slug_field = 'name'
     slug_url_kwarg = 'name'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['topics'] = Topic.objects.filter(
-            category=self.object.pk
-        )
-
-        return context
 
 
 class TopicCreateView(LoginRequiredMixin, CreateView):
@@ -82,12 +66,6 @@ class TopicUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return (self.request.user == topic.author
                 or self.request.user.is_superuser)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['topic'] = self.get_object()
-
-        return context
-
 
 class TopicDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Topic
@@ -100,6 +78,7 @@ class TopicDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def get_success_url(self):
         topic = self.get_object()
+
         return reverse('forum:category', kwargs={
             'section_name': topic.category.section.name,
             'name': topic.category.name
@@ -112,12 +91,16 @@ class PostCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['topic'] = Topic.objects.get(id=self.kwargs.get('pk'))
+        context['topic'] = Topic.objects.get(
+            id=self.kwargs.get('pk')
+        )
 
         return context
 
     def form_valid(self, form):
         form.instance.author = self.request.user
-        form.instance.topic = Topic.objects.get(id=self.kwargs.get('pk'))
+        form.instance.topic = Topic.objects.get(
+            id=self.kwargs.get('pk')
+        )
 
         return super().form_valid(form)
