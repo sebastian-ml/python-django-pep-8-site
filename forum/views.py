@@ -6,6 +6,7 @@ from django.views.generic import (CreateView,
                                   DetailView,
                                   DeleteView,
                                   UpdateView)
+from django.db.models import Max
 
 
 class SectionListView(ListView):
@@ -24,6 +25,15 @@ class CategoryDetailView(DetailView):
     model = Category
     slug_field = 'name'
     slug_url_kwarg = 'name'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        category = self.get_object()
+        context['topics'] = category.topics.annotate(
+            last_comment=Max('posts__date_posted')
+        ).order_by('-last_comment', '-date_posted')
+
+        return context
 
 
 class TopicCreateView(LoginRequiredMixin, CreateView):

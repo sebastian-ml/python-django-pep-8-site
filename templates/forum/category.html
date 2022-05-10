@@ -31,30 +31,42 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">Author</th>
-            <th scope="col">Lastly commented by</th>
+            <th scope="col">Topic</th>
+            <th scope="col">Last comment</th>
+            <th scope="col">Posted by</th>
         </tr>
         </thead>
 
         <tbody>
-        {% for topic in category.topics.all %}
+        {% for topic in topics %}
             <tr>
-                <th scope="row">{{ forloop.revcounter }}</th>
-                <td>
+                <td class="align-middle">
+                    {{ forloop.revcounter }}
+                </td>
+                <td class="align-middle">
                     <a href="{{ topic.get_absolute_url }}">
                         {{ topic.title }}
-                    </a>
-                </td>
-                <td>
-                    <a href="{{ topic.author.profile.get_absolute_url }}">
-                        {{ topic.author }}
                     </a>
                 </td>
                 <td>
                     <a href="{{ topic.posts.last.author.profile.get_absolute_url }}">
                         {{ topic.posts.last.author }}
                     </a>
+                    <p class="mb-0 text-muted">
+                        <small>
+                            {{ topic.posts.last.date_posted|date:"d M Y" }}
+                        </small>
+                    </p>
+                </td>
+                <td>
+                    <a href="{{ topic.author.profile.get_absolute_url }}">
+                        {{ topic.author }}
+                    </a>
+                    <p class="mb-0 text-muted">
+                        <small>
+                            {{ topic.date_posted|date:"d M Y" }}
+                        </small>
+                    </p>
                 </td>
             </tr>
         {% endfor %}
