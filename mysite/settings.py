@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'fb!03vh#)@1_8bq67+kuyv2gn&b5c0rmqa_h!wpxmy+9odgh8y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -132,3 +132,5 @@ STATICFILES_DIRS = [
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'main:home'
 LOGIN_URL = 'users:login'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

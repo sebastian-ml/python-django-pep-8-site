@@ -1,0 +1,14 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+    <div class="d-flex align-items-center justify-content-center">
+        <div class="text-center">
+            <h1 class="display-1">404</h1>
+            <p class="lead">
+                <span class="text-danger">Opps! </span>The page you’re looking
+                for doesn’t exist.
+            </p>
+            <a href="{% url 'main:home' %}" class="btn btn-primary">&larr; Home</a>
+        </div>
+    </div>
+{% endblock %}
