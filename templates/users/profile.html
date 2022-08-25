@@ -1,22 +1,31 @@
 {% extends 'layout/base.html' %}
+{% load static %}
 
 {% block content %}
-    <h1 class="mt-4 mb-3">
-        {{ user.username }}
-    </h1>
-    <p>Birthday: {{ user.profile.born }}</p>
-    <p>City: {{ user.profile.city }}</p>
-    <p>Gender: {{ user.profile.get_sex_display }}</p>
-    <p>Register date: {{ user.date_joined }}</p>
-    <p>Last seen: {{ user.last_login }}</p>
-    <p>
-        Status:
-        {% if user.is_superuser %}
-            <span style="color: #ff0300; ">
+    <div class="d-flex justify-content-between row flex-row-reverse">
+        <div class="mt-4 col-lg-2 mb-4 d-flex justify-content-center align-items-start">
+            <img class="img-fluid img-max"
+                 src="{% static 'images/default-profile-picture.png' %}">
+        </div>
+        <div class="col-lg-4 mb-4">
+            <h1 class="mt-4 mb-3">
+                {{ user.username }}
+            </h1>
+            <p>Birthday: {{ user.profile.born }}</p>
+            <p>City: {{ user.profile.city }}</p>
+            <p>Gender: {{ user.profile.get_sex_display }}</p>
+            <p>Register date: {{ user.date_joined }}</p>
+            <p>Last seen: {{ user.last_login }}</p>
+            <p>
+                Status:
+                {% if user.is_superuser %}
+                    <span style="color: #ff0300; ">
                     <b>Staff</b>
                 </span>
-        {% else %}
-            User
-        {% endif %}
-    </p>
+                {% else %}
+                    User
+                {% endif %}
+            </p>
+        </div>
+    </div>
 {% endblock %}
