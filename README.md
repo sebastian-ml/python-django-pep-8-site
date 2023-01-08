@@ -11,8 +11,9 @@
 </ul>
 
 ## Screenshots
-![profile](screenshots/profile.PNG)&nbsp;
+![home](screenshots/home.PNG)&nbsp;
 ![contact](screenshots/contact.PNG)&nbsp;
+![profile](screenshots/profile.PNG)&nbsp;
 ![add-post](screenshots/add-post.PNG)&nbsp;
 ![delete-post](screenshots/delete-post.PNG)&nbsp;
 ![post-view](screenshots/post-view.PNG)
